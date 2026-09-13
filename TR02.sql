@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE TRIGGER TR02_INSERT
+AFTER INSERT ON detalle_prestamo
+FOR EACH ROW
+BEGIN
+UPDATE equipo
+SET estado = 'PRESTADO'
+WHERE equipo_id = NEW.equipo_id AND estado = 'DISPONIBLE';
+END $$
+DELIMITER ;
+
